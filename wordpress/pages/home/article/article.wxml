@@ -1,0 +1,145 @@
+<cu-custom bgColor="bg-gradual-blue" isBack="{{true}}">
+  <view slot="content">{{article_detail.article.article_title}}</view>
+</cu-custom>
+<!-- title -->
+<view class="cu-bar bg-white">
+  <view class="action title-style-3">
+    <text class="text-xl text-bold" style="padding:10rpx 40rpx 10rpx 10rpx">
+      {{article_detail.article.article_title}}
+    </text>
+  </view>
+</view>
+<!-- time、like、comments、views -->
+<view class="padding bg-white">
+  <!-- time -->
+  <view class="cu-capsule radius">
+    <view class="cu-tag bg-white ">
+      <text class="cuIcon-time text-gray"></text>
+      <view class="line-gray sm" style="margin-left: 8rpx;">
+        {{article_detail.article.article_create_time}}
+      </view>
+    </view>
+  </view>
+  <!-- comment -->
+  <view class="cu-capsule radius">
+    <view class="cu-tag bg-white ">
+      <text class="cuIcon-comment text-gray"></text>
+      <view class="line-gray sm" style="margin-left: 8rpx;">{{article_detail.comments_count}}</view>
+    </view>
+  </view>
+  <!-- view -->
+  <view class="cu-capsule radius">
+    <view class="cu-tag bg-white ">
+      <text class="cuIcon-attention text-gray"></text>
+      <view class="line-gray sm" style="margin-left: 8rpx;">{{article_detail.views_count}}</view>
+    </view>
+  </view>
+  <!-- like -->
+  <view class="cu-capsule radius">
+    <view class="cu-tag bg-white ">
+      <text class="cuIcon-like text-gray"></text>
+      <view class="line-gray sm" style="margin-left: 8rpx;">{{article_detail.likes_count}}</view>
+    </view>
+  </view>
+</view>
+<!-- content -->
+<view class="cu-card article no-card solid-bottom solid-top">
+  <view class="cu-item shadow" style="padding:40rpx 35rpx;font-size:16px;word-break: break-all;">
+    {{article_detail.article.article_content}}
+  </view>
+</view>
+<!-- like -->
+<view class="cu-bar bg-white">
+  <view class="action border-title">
+    <text class="text-xl text-bold">like</text>
+    <text class="bg-gradual-blue" style="width:3rem"></text>
+  </view>
+</view>
+<!-- like count -->
+<view class="cu-bar bg-white">
+  <view class="action">
+    <text class="text-blue"></text>
+    <text class="text-grey text-sm">{{article_detail.likes_count}} person likes</text>
+  </view>
+</view>
+<!-- liek avatar list -->
+<view class="padding-sm flex flex-wrap bg-white">
+  <view class="padding-xs" wx:for="{{article_detail.likes}}" wx:key>
+    <view class="cu-avatar radius " style="background-image:url({{item.wechat_user_avatar}});"></view>
+  </view>
+</view>
+<!-- comment -->
+<view class="cu-bar bg-white">
+  <view class="action border-title">
+    <text class="text-xl text-bold">commets</text>
+    <text class="bg-gradual-blue" style="width:3rem"></text>
+  </view>
+  <view class="action">
+    <text class="text-grey text-sm">{{article_detail.comments_count}} comment</text>
+  </view>
+</view>
+<!-- comment list -->
+<view class="cu-list menu-avatar margin-botton">
+  <view class="cu-item" wx:for="{{article_detail.comments}}" data-comment_id="{{item.comment_id}}" bindtap="handleDelComment">
+    <view class="cu-avatar radius lg" style="background-image:url({{item.wechat_user_avatar}});"></view>
+    <view class="content">
+      <view class="text-pink">
+        <text class="text-cut">{{item.wechat_user_nickname}}</text>
+      </view>
+      <view class="text-gray text-sm flex">
+        <text class="text-cut">{{item.comment_content}}</text>
+      </view>
+    </view>
+    <view class="action">
+      <view class="text-grey text-xs">{{item.comment_create_time}}</view>
+      <view class="cu-tag round"></view>
+    </view>
+  </view>
+  <view class="cu-item "></view>
+</view>
+<!-- action -->
+<form catchsubmit="addCommentForArticle">
+  <view class="cu-bar foot input {{InputBottom!=0?'cur':''}}" style="bottom:{{InputBottom}}px">
+    <view class="action">
+      <text class="cuIcon-home text-grey" bindtap="goHome"></text>
+    </view>
+    <input class="solid-bottom" name="input" bindfocus="InputFocus" bindblur="InputBlur" adjust-position="{{false}}" focus="{{false}}" maxlength="300" cursor-spacing="10"></input>
+    <view class="action">
+      <text class="cuIcon-likefill text-grey" bindtap="addLikeForArticle"></text>
+    </view>
+    <button class="cu-btn shadow" formType="submit">comment</button>
+  </view>
+</form>
+<!-- prompt box -->
+<view class="cu-modal {{isShowDelTips?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class="content">Hint</view>
+      <view class="action" bindtap="hideModal">
+        <text class="cuIcon-close text-red"></text>
+      </view>
+    </view>
+    <view class="padding-xl">{{show_tips_info}}</view>
+    <view class="cu-bar bg-white justify-end">
+      <view class="action">
+        <button class="cu-btn line-green text-green" bindtap="hideDelModal">cancel</button>
+        <button class="cu-btn bg-green margin-left" bindtap="deleteCommentForArticle">confirm</button>
+      </view>
+    </view>
+  </view>
+</view>
+<!-- Authorized login -->
+<view class="cu-modal {{isShowLogin?'show':''}}">
+  <view class="cu-dialog">
+    <view class="loginInfo">
+      <image class="loginInfo-avatar" src="/images/default.png" background-size="cover"></image>
+      <view style="color: #118fff; font-size: 32rpx;margin-left: 40rpx;">Login Now</view>
+    </view>
+    <view class="cu-bar bg-white justify-end">
+      <view class="action">
+        <button class="cu-btn line-green text-green" bindtap="hideLoginModal">cancel</button>
+        <button class="cu-btn bg-green margin-left" bindtap="loginNow">confirm</button>
+      </view>
+    </view>
+  </view>
+</view>

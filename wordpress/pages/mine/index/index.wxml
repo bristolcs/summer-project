@@ -1,0 +1,71 @@
+<cu-custom bgColor="bg-gradual-blue" isBack="{{false}}">
+  <view slot="content">Mine</view>
+</cu-custom>
+<view class="userinfo">
+  <image class="userinfo-avatar" src="{{userInfo!=''?userInfo.avatarUrl:'/images/default.png'}}" background-size="cover"></image>
+  <view class='userinfo_right'>
+    <text class="userinfo_nickname" bindtap="{{userInfo!=''?'':loginNow}}">
+      {{userInfo!=''?userInfo.nickName:'Authorized login'}}
+    </text>
+    <view class='userinfo_des_box'>
+      <view class="btn-exit" wx-if="{{userInfo!=''}}" bindtap="loginOut">logout</view>
+    </view>
+  </view>
+</view>
+<scroll-view scroll-x class="bg-white nav text-center">
+  <view class="cu-item {{index==TabCur?'text-blue cur':''}}" wx:for="{{tabNav}}" wx:key bindtap='tabSelect' data-id="{{index}}">
+    {{tabNav[index]}}
+  </view>
+</scroll-view>
+<block wx:if="{{TabCur==0}}">
+  <view class="cu-list menu card-menu margin-top">
+    <view class="cu-item" wx:for="{{view_article_list}}" data-article_id="{{item.article_id}}" bindtap="getArticleById">
+      <view class="content">
+        <text class="text-grey">{{index+1}}.{{item.article_title}}</text>
+      </view>
+    </view>
+  </view>
+</block>
+<block wx:if="{{TabCur==1}}">
+  <view class="cu-list menu card-menu margin-top">
+    <view class="cu-item" wx:for="{{com_article_list}}" data-article_id="{{item.article_id}}" bindtap="getArticleById">
+      <view class="content">
+        <text class="text-grey">{{index+1}}.{{item.article_title}}</text>
+      </view>
+    </view>
+  </view>
+</block>
+<block wx:if="{{TabCur==2}}">
+  <view class="cu-list menu card-menu margin-top">
+    <view class="cu-item" wx:for="{{like_article_list}}" data-article_id="{{item.article_id}}" bindtap="getArticleById">
+      <view class="content">
+        <text class="text-grey">{{index+1}}.{{item.article_title}}</text>
+      </view>
+    </view>
+  </view>
+</block>
+<block wx:if="{{TabCur==3}}"></block>
+<block wx:if="{{TabCur==4}}">
+  <view class="cu-list menu card-menu margin-top">
+    <view class="cu-item" wx:for="{{sub_article_list}}" data-article_id="{{item.article_id}}" bindtap="getArticleById">
+      <view class="content">
+        <text class="text-grey">{{index+1}}.{{item.article_title}}</text>
+      </view>
+    </view>
+  </view>
+</block>
+<!-- Authorized login -->
+<view class="cu-modal {{isShowLogin?'show':''}}">
+  <view class="cu-dialog">
+    <view class="loginInfo">
+      <image class="loginInfo-avatar" src="/images/default.png" background-size="cover"></image>
+      <view style="color: #118fff; font-size: 32rpx;margin-left: 40rpx;">Login Now</view>
+    </view>
+    <view class="cu-bar bg-white justify-end">
+      <view class="action">
+        <button class="cu-btn line-green text-green" bindtap="hideLoginModal">cancel</button>
+        <button class="cu-btn bg-green margin-left" bindtap="loginNow">confirm</button>
+      </view>
+    </view>
+  </view>
+</view>

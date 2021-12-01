@@ -1,0 +1,19 @@
+
+  
+  /* Authorization prompt */
+  
+  .loginInfo {
+    display: flex;
+    align-items: center;
+    height: 200rpx;
+  }
+  
+  /* avatar */
+  
+  .loginInfo-avatar {
+    width: 140rpx;
+    height: 140rpx;
+    margin-left: 48rpx;
+    border-radius: 20rpx;
+    background: #f5f7f7;
+  }  

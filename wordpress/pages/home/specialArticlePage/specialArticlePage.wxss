@@ -1,0 +1,16 @@
+.no-more {
+    color: #757575;
+    font-size: 30rpx;
+    line-height: 1.8rem;
+    margin-bottom: 15rpx;
+    text-align: center;
+    margin-top: 15rpx;
+  }
+  .note_item {
+    display: -webkit-box;
+    word-break: break-all;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }

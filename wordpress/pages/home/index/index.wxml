@@ -1,0 +1,108 @@
+<cu-custom bgColor="bg-gradual-blue" isBack="{{false}}">
+  <view slot="content">Computer Land</view>
+</cu-custom>
+<!-- List of recommended articles on the home page -->
+<swiper indicator-dots="true" interval="10000" autoplay="true" indicator-color="rgba(0, 0, 0, .1)" indicator-active-color="rgba(0, 0, 0, .6)">
+  <block wx:key="id" wx:for="{{recommendation_article_list}}">
+    <swiper-item data-article_id="{{item.article_id}}" data-author_user_id="{{item.author_user_id}}" bindtap="getArticleById">
+      <image mode="aspectFill" src="{{item.article_img}}" />
+      <view class="swiper-mask"></view>
+      <view class="swiper-desc">
+        <text>{{item.article_title}}</text>
+      </view>
+    </swiper-item>
+  </block>
+</swiper>
+<!-- List of recommended topics on home page -->
+<view class="selected-nav">
+  <view class='common-subtitle'>
+    <view class='common-subtitle-left'>Recommendations</view>
+    <view class='common-subtitle-right'>Sliding view</view>
+  </view>
+  <scroll-view scroll-x>
+    <view class="selected-nav-list">
+      <block wx:key="id" wx:for="{{recommendation_special_list}}">
+        <view class="selected-nav-item" data-special_id="{{item.special_id}}" bindtap="getArticlelistBySpecialId">
+          <view>
+            <image mode="aspectFill" src="{{item.special_img}}"></image>
+          </view>
+          <view>
+            <text>{{item.special_title}}</text>
+          </view>
+        </view>
+      </block>
+    </view>
+  </scroll-view>
+</view>
+<!-- search -->
+<form catchsubmit="searchSubmit">
+  <view class="box">
+    <view class="cu-bar search bg-white">
+      <view class="search-form round padding-left">
+        <input type="text" placeholder="search some things" name="input" confirm-type="search"></input>
+        <view class="action">
+          <button size="mini" plain="true" style="border: 0px solid #fff;" formType="submit">
+            <text class="cuIcon-search"></text>
+          </button>
+        </view>
+      </view>
+    </view>
+  </view>
+</form>
+<!-- Article list -->
+<view class="cu-card article no-card" wx:for="{{article_list}}" data-article_id="{{item.article_id}}" data-author_user_id="{{item.author_user_id}}" bindtap="getArticleById">
+  <view class="cu-item shadow">
+    <view class="content">
+      <image src="{{item.article_img}}" mode="aspectFill"></image>
+      <view class="desc">
+        <view class="text-black padding-sm">
+          {{item.article_title}}
+        </view>
+        <view>
+          <!-- time -->
+          <view class="cu-capsule radius">
+            <view class="cu-tag bg-white sm">
+              <text class="cuIcon-time text-gray"></text>
+              <view class="line-gray sm" style="margin-left: 8rpx;">
+                {{item.article_create_time}}
+              </view>
+            </view>
+          </view>
+          <!-- comment -->
+          <view class="cu-capsule radius">
+            <view class="cu-tag bg-white sm">
+              <text class="cuIcon-comment text-gray"></text>
+              <view class="line-gray sm" style="margin-left: 8rpx;">{{item.comments}}</view>
+            </view>
+          </view>
+          <!-- like -->
+          <view class="cu-capsule radius">
+            <view class="cu-tag bg-white sm">
+              <text class="cuIcon-like text-gray"></text>
+              <view class="line-gray sm" style="margin-left: 8rpx;">{{item.likes}}</view>
+            </view>
+          </view>
+          <!-- view -->
+          <view class="cu-capsule radius">
+            <view class="cu-tag bg-white sm">
+              <text class="cuIcon-attention text-gray"></text>
+              <view class="line-gray sm" style="margin-left: 8rpx;">{{item.views}}</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<!-- prompt box -->
+<view class="cu-modal {{isShowTips?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class="content">Hint</view>
+      <view class="action" bindtap="hideModal">
+        <text class="cuIcon-close text-red"></text>
+      </view>
+    </view>
+    <view class="padding-xl">{{show_tips_info}}</view>
+  </view>
+</view>

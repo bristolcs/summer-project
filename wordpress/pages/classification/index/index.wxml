@@ -1,0 +1,70 @@
+<cu-custom bgColor="bg-gradual-blue" isBack="{{false}}">
+  <view slot="content">Classification</view>
+</cu-custom>
+<view class="flex" wx:for="{{special_list_0}}">
+  <view class="flex-sub  margin-xs radius">
+    <view class="cu-card dynamic">
+      <view class="cu-item" data-special_id="{{item.special_id}}" bindtap="getArticlelistBySpecialId">
+        <view class="only-img" style="background-repeat: no-repeat;background-size: cover; width: 300rpx;height: 300rpx; background-image:url({{item.special_img}});"></view>
+      </view>
+      <view class="cu-item">
+        <view class="flex" style="background-color: #f1f1f1;">
+          <view class="flex-treble text-bold note2_item">{{item.special_title}}</view>
+          <view class="flex-sub bg-grey round" bindtap="{{item.isSubscribe==1?'desubscribeSpecial':'subscribeSpecial'}}" data-special_id="{{item.special_id}}" style="font-size: smaller; text-align: center;">
+            {{item.isSubscribe==1?'cancel':'subscribe'}}
+          </view>
+        </view>
+      </view>
+      <view class="cu-item" style="background-color: #f1f1f1;">
+        <text class="text-gray note_item">{{item.special_describe}}</text>
+      </view>
+    </view>
+  </view>
+  <view class="flex-sub  margin-xs radius">
+    <view class="cu-card dynamic">
+      <view class="cu-item" data-special_id="{{special_list_1[index].special_id}}" bindtap="getArticlelistBySpecialId">
+        <view wx:if="{{special_list_1[index]}}" class="only-img" style="background-repeat: no-repeat;background-size: cover; width: 300rpx;height: 300rpx; background-image:url({{special_list_1[index].special_img}});"></view>
+      </view>
+      <view class="cu-item">
+        <view class="flex" style="background-color: #f1f1f1;">
+          <view wx:if="{{special_list_1[index]}}" class="flex-treble text-bold note2_item">
+            {{special_list_1[index].special_title}}
+          </view>
+          <view wx:if="{{special_list_1[index]}}" bindtap="{{special_list_1[index].isSubscribe==1?'desubscribeSpecial':'subscribeSpecial'}}" data-special_id="{{special_list_1[index].special_id}}" class="flex-sub bg-grey round" style="font-size: smaller; text-align: center;">
+            {{special_list_1[index].isSubscribe==1?'cancel':'subscribe'}}
+          </view>
+        </view>
+      </view>
+      <view wx:if="{{special_list_1[index]}}" class="cu-item" style="background-color: #f1f1f1;">
+        <text class="text-gray note_item">{{special_list_1[index].special_describe}}</text>
+      </view>
+    </view>
+  </view>
+</view>
+<!-- prompt box -->
+<view class="cu-modal {{isShowTips?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class="content">Hint</view>
+      <view class="action" bindtap="hideModal">
+        <text class="cuIcon-close text-red"></text>
+      </view>
+    </view>
+    <view class="padding-xl">{{show_tips_info}}</view>
+  </view>
+</view>
+<!-- Authorized login -->
+<view class="cu-modal {{isShowLogin?'show':''}}">
+  <view class="cu-dialog">
+    <view class="loginInfo">
+      <image class="loginInfo-avatar" src="/images/default.png" background-size="cover"></image>
+      <view style="color: #118fff; font-size: 32rpx;margin-left: 40rpx;">Login Now</view>
+    </view>
+    <view class="cu-bar bg-white justify-end">
+      <view class="action">
+        <button class="cu-btn line-green text-green" bindtap="hideLoginModal">cancel</button>
+        <button class="cu-btn bg-green margin-left" bindtap="loginNow">confirm</button>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,46 @@
+{
+  "pages": [
+    "pages/home/index/index",
+    "pages/classification/index/index",
+    "pages/home/article/article",
+    "pages/mine/index/index",
+    "pages/home/searchPage/searchPage",
+    "pages/home/specialArticlePage/specialArticlePage"
+  ],
+  "tabBar": {
+    "color": "#959595",
+    "selectedColor": "#118fff",
+    "borderStyle": "white",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/home/index/index",
+        "iconPath": "images/tab-home.png",
+        "selectedIconPath": "images/tab-home-on.png",
+        "text": "Home page"
+      },
+      {
+        "pagePath": "pages/classification/index/index",
+        "iconPath": "images/tab-topic.png",
+        "selectedIconPath": "images/tab-topic-on.png",
+        "text": "Classification"
+      },
+      {
+        "pagePath": "pages/mine/index/index",
+        "iconPath": "images/tab-my.png",
+        "selectedIconPath": "images/tab-my-on.png",
+        "text": "Mine"
+      }
+    ]
+  },
+  "window": {
+    "navigationBarBackgroundColor": "#39b54a",
+    "navigationBarTitleText": "Color UI",
+    "navigationStyle": "custom",
+    "navigationBarTextStyle": "white"
+  },
+  "usingComponents": {
+    "cu-custom": "/colorui/components/cu-custom"
+  },
+  "sitemapLocation": "sitemap21.json"
+}

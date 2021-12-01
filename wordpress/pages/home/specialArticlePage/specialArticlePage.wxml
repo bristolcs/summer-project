@@ -1,0 +1,63 @@
+<cu-custom bgColor="bg-gradual-blue" isBack="{{true}}">
+    <view slot="content">{{special.special_title}}</view>
+</cu-custom>
+<!-- background -->
+<view class="bg-img bg-mask padding-tb-xl" style="background-image: url('{{special.special_img}}');height: 240rpx;">
+    <view class="text-white">
+        <view class="padding-xs text-xl">
+            <text class="note_item">{{special.special_describe}}</text>
+        </view>
+    </view>
+</view>
+<view class="margin-top"></view>
+<!-- Article list -->
+<view class="cu-card article no-card" wx:for="{{article_list}}" data-article_id="{{item.article_id}}" data-author_user_id="{{item.author_user_id}}" bindtap="getArticleById">
+    <view class="cu-item shadow">
+        <view class="content">
+            <image src="{{item.article_img}}" mode="aspectFill"></image>
+            <view class="desc">
+                <view class="text-black padding-sm">{{item.article_title}}</view>
+                <view>
+                    <!-- time -->
+                    <view class="cu-capsule radius">
+                        <view class="cu-tag bg-white sm">
+                            <text class="cuIcon-time text-gray"></text>
+                            <view class="line-gray sm" style="margin-left: 8rpx;">
+                                {{item.article_create_time}}
+                            </view>
+                        </view>
+                    </view>
+                    <!-- comment -->
+                    <view class="cu-capsule radius">
+                        <view class="cu-tag bg-white sm">
+                            <text class="cuIcon-comment text-gray"></text>
+                            <view class="line-gray sm" style="margin-left: 8rpx;">
+                                {{item.comments}}
+                            </view>
+                        </view>
+                    </view>
+                    <!-- like -->
+                    <view class="cu-capsule radius">
+                        <view class="cu-tag bg-white sm">
+                            <text class="cuIcon-like text-gray"></text>
+                            <view class="line-gray sm" style="margin-left: 8rpx;">
+                                {{item.likes}}
+                            </view>
+                        </view>
+                    </view>
+                    <!-- view -->
+                    <view class="cu-capsule radius">
+                        <view class="cu-tag bg-white sm">
+                            <text class="cuIcon-attention text-gray"></text>
+                            <view class="line-gray sm" style="margin-left: 8rpx;">
+                                {{item.views}}
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+<!-- empty -->
+<view class="no-more" wx-if="{{article_list==''}}">- No More Articles -</view>
